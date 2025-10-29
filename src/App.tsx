@@ -24,10 +24,10 @@ function getWinner(squares: Square[]) {
 	}
 	return null;
 }
-//I do this because every component that recienve prps those ned to have a type
+
 type SquareProps = {
-	clickSquare: () => void; //empty function
-	value: Square; // "X" | "O"
+	clickSquare: () => void;
+	value: Square;
 };
 
 function Square({ clickSquare, value }: SquareProps) {
