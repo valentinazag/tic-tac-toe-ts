@@ -25,12 +25,13 @@ function getWinner(squares: Square[]) {
 	return null;
 }
 
-type SquareProps = {
+function Square({
+	clickSquare,
+	value,
+}: {
 	clickSquare: () => void;
 	value: Square;
-};
-
-function Square({ clickSquare, value }: SquareProps) {
+}) {
 	return (
 		<button type="button" className="square" onClick={clickSquare}>
 			{value}
@@ -66,11 +67,13 @@ function Board() {
 
 	function composeRows(squares: Square[]) {
 		const SIZE = 3;
-		const slices: Square[][] = [
-			squares.slice(0, SIZE),
-			squares.slice(SIZE, 2 * SIZE),
-			squares.slice(2 * SIZE, 3 * SIZE),
-		];
+		const slices = Array.from({ length: SIZE })
+			.fill(1)
+			.map((_, index) => {
+				const to = (index + 1) * SIZE;
+				const from = index * SIZE;
+				return squares.slice(from, to);
+			});
 		return slices;
 	}
 
